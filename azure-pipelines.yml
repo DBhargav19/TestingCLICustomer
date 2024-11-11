@@ -21,3 +21,14 @@ steps:
   inputs:
     cliVersion: 'WIN_24.10.9050.17872'
 
+- task: UiPathPack@5
+  inputs:
+    versionType: 'AutoVersion'
+    projectJsonPath: '$(Build.SourcesDirectory)'
+    orchestratorConnection: 'OrchestratorTesting'
+    outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+- task: UiPathDeploy@5
+  inputs:
+    orchestratorConnection: 'OrchestratorTesting'
+    packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
+    folderName: 'AzureCICD'
